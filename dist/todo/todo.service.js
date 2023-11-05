@@ -16,7 +16,7 @@ exports.TodoService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const todo_entinty_1 = require("./todo.entinty");
+const todo_entity_1 = require("./entities/todo.entity");
 let TodoService = class TodoService {
     constructor(todoRepository) {
         this.todoRepository = todoRepository;
@@ -25,14 +25,9 @@ let TodoService = class TodoService {
         return this.todoRepository.find();
     }
     create(title) {
-        try {
-            const todo = new todo_entinty_1.Todo();
-            todo.title = title;
-            return this.todoRepository.save(todo);
-        }
-        catch (error) {
-            return error;
-        }
+        const todo = new todo_entity_1.Todo();
+        todo.title = title;
+        return this.todoRepository.save(todo);
     }
     async update(id, isCompleted) {
         const todo = await this.todoRepository.findOne({ where: { id: id } });
@@ -49,7 +44,7 @@ let TodoService = class TodoService {
 exports.TodoService = TodoService;
 exports.TodoService = TodoService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(todo_entinty_1.Todo)),
+    __param(0, (0, typeorm_1.InjectRepository)(todo_entity_1.Todo)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], TodoService);
 //# sourceMappingURL=todo.service.js.map

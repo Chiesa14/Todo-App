@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Todo } from './todo.entinty';
+import { Todo } from './entities/todo.entity';
 @Injectable()
 export class TodoService {
   constructor(
@@ -13,13 +13,9 @@ export class TodoService {
     return this.todoRepository.find();
   }
   create(title: string) {
-    try {
-      const todo = new Todo();
-      todo.title = title;
-      return this.todoRepository.save(todo);
-    } catch (error) {
-      return error;
-    }
+    const todo = new Todo();
+    todo.title = title;
+    return this.todoRepository.save(todo);
   }
   async update(id: number, isCompleted: boolean) {
     const todo = await this.todoRepository.findOne({ where: { id: id } });

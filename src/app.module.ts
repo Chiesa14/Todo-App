@@ -7,6 +7,7 @@ import { TodoModule } from './todo/todo.module';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'database.sqlite',
+
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
